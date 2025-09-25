@@ -55,11 +55,11 @@ export default function Home() {
       }}
     >
       <Header />
-      <div className="max-w-[1400px] mx-auto grid grid-cols-5 gap-16 py-12">
-        <div className="col-span-3">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-16 py-12 px-4">
+        <div className="md:col-span-3">
           <Habanero />
         </div>
-        <div className="col-span-2">
+        <div className="md:col-span-2">
           <OrderSummary />
         </div>
       </div>
