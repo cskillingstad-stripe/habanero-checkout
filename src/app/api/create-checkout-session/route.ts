@@ -1,23 +1,23 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { ITEMS } from '@/constants';
 
 const stripe = new Stripe(process.env.STRIPE_TEST_SK!, {
   apiVersion: '2025-08-27.basil',
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const calculateOrderAmount = (_items: any) => {
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return 1400;
-};
+// const calculateOrderAmount = (_items: any) => {
+//   // Replace this constant with a calculation of the order's amount
+//   // Calculate the order total on the server to prevent
+//   // people from directly manipulating the amount on the client
+//   return 1400;
+// };
 
 export async function POST(request: Request) {
   try {
     // const body = await request.json();
     // const { items } = body;
-    const items = [];
+    // const items = [];
 
     // Create a Checkout Session
     const session = await stripe.checkout.sessions.create({
@@ -46,18 +46,31 @@ export async function POST(request: Request) {
 
       // All needed for payment mode
       mode: 'payment',
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'XL T-Shirt',
-            },
-            unit_amount: calculateOrderAmount(items),
+      // Hardcode for now just one per ITEM
+      line_items: Object.values(ITEMS).map((item) => ({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.name,
           },
-          quantity: 1,
+          unit_amount: item.price,
         },
-      ],
+        quantity: 1,
+        adjustable_quantity: {
+          enabled: true,
+        },
+      })),
+
+      // [{
+      //   price_data: {
+      //     currency: 'usd',
+      //     product_data: {
+      //       name: 'XL T-Shirt',
+      //     },
+      //     unit_amount: ,
+      //   },
+      //   quantity: 1,
+      // }],
 
       return_url: `${request.headers.get('origin')}/checkout/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
