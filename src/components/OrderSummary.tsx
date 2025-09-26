@@ -119,7 +119,7 @@ export default function OrderSummary() {
           </div>
           <div className="flex justify-between font-semibold text-[#131214]">
             <span>Sales tax</span>
-            <span>{checkout.checkout.total.taxInclusive.amount}</span>
+            <span>{checkout.checkout.total.taxExclusive.amount}</span>
           </div>
           <div className="border-t border-gray-200 my-4"></div>
           <div className="flex justify-between font-semibold text-[#131214]">
