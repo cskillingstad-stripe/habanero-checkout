@@ -41,7 +41,6 @@ export default function Home() {
         borderBottom: '1px solid #D9D9D9',
         borderRadius: '0',
         boxShadow: 'none',
-        marginBottom: '0',
       },
     },
   };
