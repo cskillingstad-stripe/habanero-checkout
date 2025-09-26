@@ -3,30 +3,6 @@ import { IconTrash, IconPlus, IconMinus } from '@tabler/icons-react';
 import { useCheckout } from '@stripe/react-stripe-js/checkout';
 import { ITEMS } from '@/constants';
 
-const products = [
-  {
-    id: 1,
-    name: "Women's Galtymore Fleece",
-    price: 160.0,
-    image: '/products/fleece.png',
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "Men's Errigal Puffer Jacket",
-    price: 315.0,
-    image: '/products/puffer.png',
-    quantity: 1,
-  },
-  {
-    id: 3,
-    name: 'Croagh Sleeping Bag -40F Down',
-    price: 130.0,
-    image: '/products/sleeping-bag.png',
-    quantity: 1,
-  },
-];
-
 export default function OrderSummary() {
   const checkout = useCheckout();
 
