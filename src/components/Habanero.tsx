@@ -11,6 +11,15 @@ export default function Habanero() {
     if (checkout.type === 'success' && !didMount.current) {
       // @ts-expect-error - checkout.checkout.createHabaneroElement is not public yet
       const habaneroElement = checkout.checkout.createHabaneroElement();
+
+      // @ts-expect-error - event not typed
+      habaneroElement.on('confirm', (event) => {
+        checkout.checkout.confirm({
+          // @ts-expect-error - habaneroConfirmEvent is not public yet
+          habaneroConfirmEvent: event,
+        });
+      });
+
       habaneroElement.mount(ref.current);
       didMount.current = true;
     }

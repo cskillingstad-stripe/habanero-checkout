@@ -72,7 +72,7 @@ export async function POST(request: Request) {
       //   quantity: 1,
       // }],
 
-      return_url: `${request.headers.get('origin')}/checkout/complete?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     return NextResponse.json({ clientSecret: session.client_secret });

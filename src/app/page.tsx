@@ -53,7 +53,6 @@ export default function Home() {
         elementsOptions: { appearance },
       }}
     >
-      <Header />
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-16 py-12 px-4">
         <div className="md:col-span-3">
           <Habanero />
