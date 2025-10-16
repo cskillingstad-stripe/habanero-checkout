@@ -52,12 +52,16 @@ export default function Home() {
         elementsOptions: { appearance },
       }}
     >
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-5 min-h-screen">
-        <div className="md:col-span-2 min-h-screen bg-[#f0f0f0]">
-          <OrderSummary />
+      <div className="flex flex-col md:flex-row justify-center min-h-screen">
+        <div className="w-full md:flex-1 md:min-h-screen bg-[#f0f0f0] flex md:justify-end justify-center">
+          <div className="w-full max-w-[460px]">
+            <OrderSummary />
+          </div>
         </div>
-        <div className="md:col-span-3 min-h-screen">
-          <Habanero />
+        <div className="w-full md:flex-1 md:min-h-screen flex md:justify-start justify-center">
+          <div className="w-full max-w-[460px]">
+            <Habanero />
+          </div>
         </div>
       </div>
     </CheckoutProvider>

@@ -28,7 +28,7 @@ export default function Habanero() {
   return (
     <div
       ref={ref}
-      className="p-20 shadow-[-8px_0_16px_0_rgba(0,0,0,0.05)] min-h-screen"
+      className="pt-6 md:pt-20 px-10 md:pl-20 md:pr-0 md:shadow-[-8px_0_16px_0_rgba(0,0,0,0.05)] min-h-screen"
     />
   );
 }

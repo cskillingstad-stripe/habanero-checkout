@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Habanero Galtee',
-  description: 'Habanero Galtee',
+  title: 'Habanero Checkout',
+  description: 'Habanero Checkout',
 };
 
 export default function RootLayout({
