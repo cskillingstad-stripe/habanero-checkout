@@ -1,107 +1,145 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
-import { IconTrash, IconPlus, IconMinus } from '@tabler/icons-react';
-import { useCheckout } from '@stripe/react-stripe-js/checkout';
+import { IconBuildingStore } from '@tabler/icons-react';
 import { ITEMS } from '@/constants';
 
 export default function OrderSummary() {
-  const checkout = useCheckout();
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
-  if (checkout.type !== 'success') {
-    return null;
-  }
+  const items = [
+    {
+      id: 'fleece',
+      name: 'Tunnel Vision',
+      description: 'Next-gen tech.',
+      price: ITEMS.fleece.price,
+      image: ITEMS.fleece.image,
+    },
+    {
+      id: 'puffer',
+      name: 'Passive Thought',
+      description: 'Elevate your game.',
+      price: ITEMS.puffer.price,
+      image: ITEMS.puffer.image,
+    },
+    {
+      id: 'sleeping-bag',
+      name: 'Cryptic Learnings',
+      description: 'Savor the taste.',
+      price: ITEMS['sleeping-bag'].price,
+      image: ITEMS['sleeping-bag'].image,
+    },
+  ];
 
-  const handleQuantityChange = (itemId: string, quantity: number) => {
-    checkout.checkout.updateLineItemQuantity({ lineItem: itemId, quantity });
+  const subtotal = items.reduce((sum, item) => sum + item.price, 0);
+
+  const formatPrice = (price: number) => {
+    return `$${(price / 100).toFixed(2)}`;
+  };
+
+  const toggleDetails = (itemId: string) => {
+    setExpandedItem(expandedItem === itemId ? null : itemId);
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6">Order summary</h2>
-      <div className="bg-white rounded-lg p-6 shadow-sm">
-        <div className="space-y-6 mb-8">
-          {checkout.checkout.lineItems.map((item) => {
-            const product = ITEMS[item.name as keyof typeof ITEMS];
+    <div className="p-20 rounded-lg min-h-screen">
+      <div className="flex items-center gap-2 mb-12">
+        <button className="flex items-center justify-center hover:opacity-70">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <div className="flex items-center gap-2">
+          <IconBuildingStore size={20} stroke={1.5} className="text-gray-700" />
+          <h1 className="text-sm font-medium text-gray-900">Merchant name</h1>
+        </div>
+      </div>
 
-            return (
-              <div key={item.id} className="flex gap-4 mb-6">
-                <div className="relative w-[71px] h-[100px] bg-gray-100 rounded-lg overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex-1 flex flex-col min-h-[100px] py-2">
-                  <div className="flex justify-between">
-                    <h3 className="text-lg font-semibold">{product.title}</h3>
-                    <button className="p-2 hover:bg-gray-100 rounded-lg">
-                      <IconTrash size={20} />
-                    </button>
-                  </div>
-                  <div className="mt-auto flex justify-between items-center">
-                    <p className="text-gray-400">{item.total.amount}</p>
-                    <div className="flex items-center bg-white rounded-lg border border-gray-200">
-                      <button
-                        className="px-2 py-2 hover:bg-gray-100"
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity - 1)
-                        }
-                      >
-                        <IconMinus size={16} />
-                      </button>
-                      <span className="w-6 text-center">{item.quantity}</span>
-                      <button
-                        className="px-2 py-2 hover:bg-gray-100"
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity + 1)
-                        }
-                      >
-                        <IconPlus size={16} />
-                      </button>
-                    </div>
-                  </div>
-                </div>
+      <div className="mb-8">
+        <div className="text-base text-gray-600 mb-1 font-medium">
+          Pay Merchant
+        </div>
+        <div className="text-4xl font-semibold text-gray-900">
+          {formatPrice(subtotal)}
+        </div>
+      </div>
+
+      <div className="space-y-4 mb-10">
+        {items.map((item) => (
+          <div key={item.id} className="flex items-start gap-3">
+            <div className="w-10 h-10 relative flex-shrink-0 rounded overflow-hidden">
+              <Image
+                src={item.image}
+                alt={item.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="font-medium text-sm text-gray-900">
+                {item.name}
               </div>
-            );
-          })}
-        </div>
-
-        <div className="border-t border-gray-200 my-6"></div>
-
-        {/* Promo Code */}
-        <div className="flex gap-2 mb-6">
-          <input
-            type="text"
-            placeholder="Promo code"
-            className="flex-1 px-4 py-3 border border-gray-200 rounded-lg text-base"
-          />
-          <button className="bg-[#222725] text-white px-6 py-3 rounded-lg text-base font-medium hover:bg-gray-800">
-            Apply
-          </button>
-        </div>
-
-        <div className="border-t border-gray-200 my-6"></div>
-
-        {/* Summary */}
-        <div className="space-y-4 text-base leading-[1.15]">
-          <div className="flex justify-between font-semibold text-[#131214]">
-            <span>Subtotal</span>
-            <span>{checkout.checkout.total.subtotal.amount}</span>
+              <div className="text-xs font-normal text-gray-600">
+                {item.description}
+              </div>
+            </div>
+            <div className="text-right flex-shrink-0">
+              <div className="font-medium text-sm text-gray-900">
+                {formatPrice(item.price)}
+              </div>
+              <button
+                onClick={() => toggleDetails(item.id)}
+                className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1"
+              >
+                See details
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  className={`transform transition-transform ${
+                    expandedItem === item.id ? 'rotate-180' : ''
+                  }`}
+                >
+                  <path
+                    d="M3 4.5L6 7.5L9 4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
-          <div className="flex justify-between font-semibold text-[#131214]">
-            <span>Shipping</span>
-            <span>{checkout.checkout.total.shippingRate.amount}</span>
-          </div>
-          <div className="flex justify-between font-semibold text-[#131214]">
-            <span>Sales tax</span>
-            <span>{checkout.checkout.total.taxExclusive.amount}</span>
-          </div>
-          <div className="border-t border-gray-200 my-4"></div>
-          <div className="flex justify-between font-semibold text-[#131214]">
-            <span>Total</span>
-            <span>{checkout.checkout.total.total.amount}</span>
-          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-between text-gray-900 mb-4">
+        <span className="font-medium text-sm">Subtotal</span>
+        <span className="font-semibold text-sm">{formatPrice(subtotal)}</span>
+      </div>
+
+      <div className="border-t border-gray-300 pt-4 mb-4">
+        <button className="bg-[#e8e8e8] text-gray-900 text-sm font-semibold hover:bg-[#dedede] px-4 py-2 rounded-md">
+          Add promotion code
+        </button>
+      </div>
+
+      <div className="border-t border-gray-300 pt-4">
+        <div className="flex justify-between text-gray-900 font-medium text-sm">
+          <span>Total due today</span>
+          <span>{formatPrice(subtotal)}</span>
         </div>
       </div>
     </div>

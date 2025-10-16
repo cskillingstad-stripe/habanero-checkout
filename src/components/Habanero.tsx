@@ -25,5 +25,10 @@ export default function Habanero() {
     }
   }, [checkout]);
 
-  return <div ref={ref} />;
+  return (
+    <div
+      ref={ref}
+      className="p-20 shadow-[-8px_0_16px_0_rgba(0,0,0,0.05)] min-h-screen"
+    />
+  );
 }
