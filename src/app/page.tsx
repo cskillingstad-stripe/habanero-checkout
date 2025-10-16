@@ -30,18 +30,6 @@ export default function Home() {
     // Make it look like Galtee Figma
     // @ts-expect-error - condensed inputs not GA'ed yet
     inputs: 'condensed',
-    variables: {
-      colorPrimary: '#222725',
-    },
-    rules: {
-      '.AccordionItem': {
-        backgroundColor: 'none',
-        border: 'none',
-        borderBottom: '1px solid #D9D9D9',
-        borderRadius: '0',
-        boxShadow: 'none',
-      },
-    },
   };
 
   return (
