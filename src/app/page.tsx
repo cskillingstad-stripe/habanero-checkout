@@ -42,12 +42,12 @@ export default function Home() {
     >
       <div className="flex flex-col md:flex-row justify-center min-h-screen">
         <div className="w-full md:flex-1 md:min-h-screen bg-[#f0f0f0] flex md:justify-end justify-center">
-          <div className="w-full max-w-[460px]">
+          <div className="w-full max-w-[500px]">
             <OrderSummary />
           </div>
         </div>
         <div className="w-full md:flex-1 md:min-h-screen flex md:justify-start justify-center">
-          <div className="w-full max-w-[460px]">
+          <div className="w-full max-w-[500px]">
             <Habanero />
           </div>
         </div>

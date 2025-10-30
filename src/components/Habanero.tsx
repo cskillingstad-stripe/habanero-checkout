@@ -9,14 +9,14 @@ export default function Habanero() {
   // No <HabaneroElement exists yet, use checkout.createhHabaneroElement to hack it in
   useEffect(() => {
     if (checkout.type === 'success' && !didMount.current) {
-      // @ts-expect-error - checkout.checkout.createHabaneroElement is not public yet
-      const habaneroElement = checkout.checkout.createHabaneroElement();
+      // @ts-expect-error - checkout.checkout.createPaymentFormElement is not public yet
+      const habaneroElement = checkout.checkout.createPaymentFormElement();
 
       // @ts-expect-error - event not typed
       habaneroElement.on('confirm', (event) => {
         checkout.checkout.confirm({
-          // @ts-expect-error - habaneroConfirmEvent is not public yet
-          habaneroConfirmEvent: event,
+          // @ts-expect-error - paymentFormConfirmEvent is not public yet
+          paymentFormConfirmEvent: event,
         });
       });
 
