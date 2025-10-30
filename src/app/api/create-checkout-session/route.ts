@@ -46,6 +46,7 @@ export async function POST(request: Request) {
 
       // All needed for payment mode
       mode: 'payment',
+      payment_method_types: ['card', 'us_bank_account', 'klarna'],
       // Hardcode for now just one per ITEM
       line_items: Object.values(ITEMS).map((item) => ({
         price_data: {
