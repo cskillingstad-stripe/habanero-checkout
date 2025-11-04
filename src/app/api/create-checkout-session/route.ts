@@ -79,6 +79,15 @@ export async function POST(request: Request) {
           },
         },
       })),
+
+      // Enable Tax ID collection
+      tax_id_collection: {
+        enabled: true,
+        // TODO(cskillingstad): required not supported for ui_mode: 'custom'
+        // Hopefully Guacamole supports this
+        // required: 'if_supported',
+      },
+
       return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
 
