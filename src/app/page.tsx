@@ -16,13 +16,13 @@ const stripePromise = loadStripe('pk_test_fEnfqkUj7brxj0AAGO5Ig8rg', {
 });
 
 export default function Home() {
-  const promise = useMemo(() => {
-    return fetch('/api/create-checkout-session', {
+  const fetchClientSecret = async () => {
+    const res = await fetch('/api/create-checkout-session', {
       method: 'POST',
-    })
-      .then((res) => res.json())
-      .then((data) => data.clientSecret);
-  }, []);
+    });
+    const data = await res.json();
+    return data.clientSecret;
+  };
 
   const appearance: Appearance = {
     theme: 'stripe',
@@ -36,7 +36,7 @@ export default function Home() {
     <CheckoutProvider
       stripe={stripePromise}
       options={{
-        fetchClientSecret: () => promise,
+        fetchClientSecret,
         elementsOptions: { appearance },
       }}
     >
