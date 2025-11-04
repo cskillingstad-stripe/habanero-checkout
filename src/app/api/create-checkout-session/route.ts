@@ -87,6 +87,14 @@ export async function POST(request: Request) {
         // Hopefully Guacamole supports this
         // required: 'if_supported',
       },
+      // TODO(cskillingstad): name_collection not supported for ui_mode: 'custom'
+      // When this is enabled, TIDE should not show business name input
+      // Hopefully Guacamole supports this
+      // name_collection: {
+      //   business: {
+      //     enabled: true,
+      //   },
+      // },
 
       return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
