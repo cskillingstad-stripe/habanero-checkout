@@ -17,6 +17,19 @@ export default function Habanero() {
         checkout.checkout.confirm({
           // @ts-expect-error - paymentFormConfirmEvent is not public yet
           paymentFormConfirmEvent: event,
+          // Placeholder until we collect email
+          email: 'test@stripe.com',
+          // Placeholder until we have shipping AE
+          shippingAddress: {
+            name: 'John Doe',
+            address: {
+              line1: '123 Main St',
+              city: 'Anytown',
+              state: 'CA',
+              postal_code: '12345',
+              country: 'US',
+            },
+          },
         });
       });
 

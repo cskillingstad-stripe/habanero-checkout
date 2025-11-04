@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { ITEMS } from '@/constants';
+import { ITEMS, SHIPPING_OPTIONS } from '@/constants';
 
 const stripe = new Stripe(process.env.STRIPE_TEST_SK!, {
   apiVersion: '2025-08-27.basil',
@@ -61,18 +61,24 @@ export async function POST(request: Request) {
           enabled: true,
         },
       })),
-
-      // [{
-      //   price_data: {
-      //     currency: 'usd',
-      //     product_data: {
-      //       name: 'XL T-Shirt',
-      //     },
-      //     unit_amount: ,
-      //   },
-      //   quantity: 1,
-      // }],
-
+      // Shipping address collection + methods
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA'],
+      },
+      shipping_options: SHIPPING_OPTIONS.map((option) => ({
+        shipping_rate_data: {
+          display_name: option.name,
+          type: 'fixed_amount',
+          fixed_amount: {
+            amount: option.price,
+            currency: 'usd',
+          },
+          delivery_estimate: {
+            minimum: option.min,
+            maximum: option.max,
+          },
+        },
+      })),
       return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
 
