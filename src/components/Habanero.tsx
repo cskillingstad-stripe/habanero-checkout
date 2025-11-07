@@ -10,19 +10,6 @@ export default function Habanero() {
   useEffect(() => {
     if (checkoutState.type === 'success' && !didMount.current) {
       const { checkout } = checkoutState;
-      const { updateShippingAddress } = checkout;
-
-      // Placeholder until we have shipping AE
-      updateShippingAddress({
-        name: 'John Doe',
-        address: {
-          line1: '123 Main St',
-          city: 'Anytown',
-          state: 'CA',
-          postal_code: '12345',
-          country: 'US',
-        },
-      });
 
       // @ts-expect-error - checkout.createPaymentFormElement is not public yet
       const habaneroElement = checkout.createPaymentFormElement();
