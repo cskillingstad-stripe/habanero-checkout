@@ -27,6 +27,11 @@ export default function Home() {
   const appearance: Appearance = {
     theme: 'stripe',
 
+    variables: {
+      // Checkout uses 500 for medium weight (ie. in the Pay Button)
+      fontWeightMedium: '500',
+    },
+
     // Make it look like Galtee Figma
     // @ts-expect-error - condensed inputs not GA'ed yet
     inputs: 'condensed',
