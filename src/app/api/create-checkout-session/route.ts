@@ -107,6 +107,7 @@ export async function POST(request: Request) {
       },
       saved_payment_method_options: {
         payment_method_save: 'enabled',
+        payment_method_remove: 'enabled',
       },
 
       return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
