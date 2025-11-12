@@ -96,6 +96,19 @@ export async function POST(request: Request) {
       //   },
       // },
 
+      // Enable SPM
+      customer: 'cus_TPW2UsM4sSDvGh',
+      customer_update: {
+        name: 'auto',
+        shipping: 'auto',
+      },
+      payment_intent_data: {
+        setup_future_usage: 'off_session',
+      },
+      saved_payment_method_options: {
+        payment_method_save: 'enabled',
+      },
+
       return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
 

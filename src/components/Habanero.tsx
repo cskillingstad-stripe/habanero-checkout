@@ -20,7 +20,7 @@ export default function Habanero() {
           // @ts-expect-error - paymentFormConfirmEvent is not public yet
           paymentFormConfirmEvent: event,
           // Placeholder until we collect email
-          email: 'test@stripe.com',
+          // email: 'test@stripe.com',
         });
       });
 

@@ -43,7 +43,15 @@ export default function Home() {
       stripe={stripePromise}
       options={{
         fetchClientSecret,
-        elementsOptions: { appearance },
+        elementsOptions: {
+          appearance,
+          savedPaymentMethod: {
+            // Default is 'auto' in clover
+            enableSave: 'auto',
+            // Default is 'auto' in clover
+            enableRedisplay: 'auto',
+          },
+        },
       }}
     >
       <div className="flex flex-col md:flex-row justify-center min-h-screen">
