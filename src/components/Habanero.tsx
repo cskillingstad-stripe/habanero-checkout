@@ -11,13 +11,11 @@ export default function Habanero() {
     if (checkoutState.type === 'success' && !didMount.current) {
       const { checkout } = checkoutState;
 
-      // @ts-expect-error - checkout.createPaymentFormElement is not public yet
       const habaneroElement = checkout.createPaymentFormElement();
 
       // @ts-expect-error - event not typed
       habaneroElement.on('confirm', (event) => {
         checkout.confirm({
-          // @ts-expect-error - paymentFormConfirmEvent is not public yet
           paymentFormConfirmEvent: event,
           // Placeholder until we collect email
           // email: 'test@stripe.com',

@@ -16,13 +16,13 @@ const stripePromise = loadStripe('pk_test_fEnfqkUj7brxj0AAGO5Ig8rg', {
 });
 
 export default function Home() {
-  const fetchClientSecret = async () => {
-    const res = await fetch('/api/create-checkout-session', {
+  const clientSecret = useMemo(() => {
+    return fetch('/api/create-checkout-session', {
       method: 'POST',
-    });
-    const data = await res.json();
-    return data.clientSecret;
-  };
+    })
+      .then((res) => res.json())
+      .then((data) => data.clientSecret);
+  }, []);
 
   const appearance: Appearance = {
     theme: 'stripe',
@@ -33,7 +33,6 @@ export default function Home() {
     },
 
     // Make it look like Galtee Figma
-    // @ts-expect-error - condensed inputs not GA'ed yet
     inputs: 'condensed',
     labels: 'above',
   };
@@ -42,15 +41,9 @@ export default function Home() {
     <CheckoutProvider
       stripe={stripePromise}
       options={{
-        fetchClientSecret,
+        clientSecret,
         elementsOptions: {
           appearance,
-          savedPaymentMethod: {
-            // Default is 'auto' in clover
-            enableSave: 'auto',
-            // Default is 'auto' in clover
-            enableRedisplay: 'auto',
-          },
         },
       }}
     >
