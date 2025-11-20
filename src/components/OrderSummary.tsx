@@ -89,6 +89,7 @@ export default function OrderSummary() {
             alt={items[0].name}
             fill
             className="object-cover"
+            sizes="40px"
           />
         </div>
         <h2 className="text-lg font-medium text-gray-900 mb-1">
@@ -156,6 +157,7 @@ export default function OrderSummary() {
                   alt={item.name}
                   fill
                   className="object-cover"
+                  sizes="40px"
                 />
               </div>
               <div className="flex-1 min-w-0">
