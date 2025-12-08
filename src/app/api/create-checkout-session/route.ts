@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { ITEMS, SHIPPING_OPTIONS } from '@/constants';
 
 const stripe = new Stripe(process.env.STRIPE_TEST_SK!, {
-  apiVersion: '2025-08-27.basil',
+  apiVersion: '2025-08-27.basil;custom_checkout_habanero_preview=v1',
 });
 
 // const calculateOrderAmount = (_items: any) => {
@@ -95,6 +95,56 @@ export async function POST(request: Request) {
       //     enabled: true,
       //   },
       // },
+
+      // Enable custom fields
+      custom_fields: [
+        {
+          type: 'text',
+          label: {
+            type: 'custom',
+            custom: 'Custom monogram',
+          },
+          key: 'custom_monogram',
+          optional: false,
+          // text: {
+          //   maximum_length: 3,
+          // },
+        },
+        {
+          type: 'dropdown',
+          label: {
+            type: 'custom',
+            custom: 'Gift wrapping',
+          },
+          key: 'gift_wrapping',
+          optional: false,
+          dropdown: {
+            options: [
+              {
+                label: 'Eco-friendly gift box',
+                value: 'ecogiftbox',
+              },
+              {
+                label: 'Regular gift wrap',
+                value: 'giftwrap',
+              },
+            ],
+          },
+        },
+        {
+          type: 'numeric',
+          label: {
+            type: 'custom',
+            custom: 'Group order code',
+          },
+          key: 'group_order_code',
+          optional: true,
+          // numeric: {
+          //   minimum_length: 8,
+          //   maximum_length: 8,
+          // },
+        },
+      ],
 
       // Enable SPM
       customer: 'cus_TPW2UsM4sSDvGh',
