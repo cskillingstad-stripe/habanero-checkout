@@ -106,9 +106,9 @@ export async function POST(request: Request) {
           },
           key: 'custom_monogram',
           optional: false,
-          // text: {
-          //   maximum_length: 3,
-          // },
+          text: {
+            maximum_length: 3,
+          },
         },
         {
           type: 'dropdown',
@@ -117,7 +117,7 @@ export async function POST(request: Request) {
             custom: 'Gift wrapping',
           },
           key: 'gift_wrapping',
-          optional: false,
+          optional: true,
           dropdown: {
             options: [
               {
@@ -139,10 +139,10 @@ export async function POST(request: Request) {
           },
           key: 'group_order_code',
           optional: true,
-          // numeric: {
-          //   minimum_length: 8,
-          //   maximum_length: 8,
-          // },
+          numeric: {
+            minimum_length: 8,
+            maximum_length: 8,
+          },
         },
       ],
 
