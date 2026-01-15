@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { ITEMS, SHIPPING_OPTIONS } from '@/constants';
 
 const stripe = new Stripe(process.env.STRIPE_TEST_SK!, {
-  apiVersion: '2025-08-27.basil;custom_checkout_habanero_preview=v1',
+  apiVersion: '2025-08-27.basil;custom_checkout_payment_form_preview=v1',
 });
 
 // const calculateOrderAmount = (_items: any) => {
