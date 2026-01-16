@@ -11,7 +11,7 @@ const stripePromise = loadStripe('pk_test_fEnfqkUj7brxj0AAGO5Ig8rg', {
     // "custom_checkout_beta_6",
     // 'custom_checkout_adaptive_pricing_2',
     // "custom_checkout_tax_id_1",
-    'custom_checkout_habanero_1',
+    'custom_checkout_payment_form_1',
   ],
 });
 
