@@ -24,6 +24,8 @@ export default function Habanero() {
         });
       });
 
+      window.habaneroElement = habaneroElement;
+
       habaneroElement.mount(ref.current);
       didMount.current = true;
     }

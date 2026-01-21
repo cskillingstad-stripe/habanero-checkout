@@ -80,6 +80,9 @@ export async function POST(request: Request) {
         },
       })),
 
+      // Enable billing address
+      billing_address_collection: 'required',
+
       // Enable Tax ID collection
       tax_id_collection: {
         enabled: true,
