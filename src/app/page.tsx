@@ -1,8 +1,9 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { loadStripe, Appearance } from '@stripe/stripe-js';
 import { CheckoutProvider } from '@stripe/react-stripe-js/checkout';
+import { Loader } from '@mantine/core';
 import OrderSummary from '@/components/OrderSummary';
 import Habanero from '@/components/Habanero';
 
@@ -16,13 +17,19 @@ const stripePromise = loadStripe('pk_test_fEnfqkUj7brxj0AAGO5Ig8rg', {
 });
 
 export default function Home() {
-  const fetchClientSecret = async () => {
-    const res = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-    });
-    const data = await res.json();
-    return data.clientSecret;
-  };
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      setClientSecret(data.clientSecret);
+    };
+
+    fetchClientSecret();
+  }, []);
 
   const appearance: Appearance = {
     theme: 'stripe',
@@ -32,17 +39,23 @@ export default function Home() {
       fontWeightMedium: '500',
     },
 
-    // Make it look like Galtee Figma
-    // @ts-expect-error - condensed inputs not GA'ed yet
     inputs: 'condensed',
     labels: 'above',
   };
+
+  if (!clientSecret) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader size="lg" />
+      </div>
+    );
+  }
 
   return (
     <CheckoutProvider
       stripe={stripePromise}
       options={{
-        fetchClientSecret,
+        clientSecret,
         elementsOptions: {
           appearance,
           savedPaymentMethod: {
