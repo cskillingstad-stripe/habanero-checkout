@@ -11,11 +11,44 @@ export default function Habanero() {
     if (checkoutState.type === 'success' && !didMount.current) {
       const { checkout } = checkoutState;
 
-      // @ts-expect-error - checkout.createPaymentFormElement is not public yet
+      window.checkout = checkout;
+
       const habaneroElement = checkout.createPaymentFormElement();
+
+      // Add event logs for bug bash
+      // @ts-expect-error - event not typed
+      habaneroElement.on('change', (event) => {
+        console.log('bblog change: ', event);
+      });
+      // @ts-expect-error - event not typed
+      habaneroElement.on('ready', (event) => {
+        console.log('bblog ready: ', event);
+      });
+      // @ts-expect-error - event not typed
+      habaneroElement.on('focus', (event) => {
+        console.log('bblog focus: ', event);
+      });
+      // @ts-expect-error - event not typed
+      habaneroElement.on('blur', (event) => {
+        console.log('bblog blur: ', event);
+      });
+      // @ts-expect-error - event not typed
+      habaneroElement.on('escape', (event) => {
+        console.log('bblog escape: ', event);
+      });
+      // @ts-expect-error - event not typed
+      habaneroElement.on('loaderror', (event) => {
+        console.log('bblog loaderror: ', event);
+      });
+      // @ts-expect-error - event not typed
+      habaneroElement.on('loaderstart', (event) => {
+        console.log('bblog loaderstart: ', event);
+      });
 
       // @ts-expect-error - event not typed
       habaneroElement.on('confirm', (event) => {
+        console.log('bblog confirm: ', event);
+
         checkout.confirm({
           // @ts-expect-error - paymentFormConfirmEvent is not public yet
           paymentFormConfirmEvent: event,
