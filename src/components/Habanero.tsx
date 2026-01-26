@@ -16,27 +16,21 @@ export default function Habanero() {
       const habaneroElement = checkout.createPaymentFormElement();
 
       // Add event logs for bug bash
-      // @ts-expect-error - event not typed
       habaneroElement.on('change', (event) => {
         console.log('bblog change: ', event);
       });
-      // @ts-expect-error - event not typed
       habaneroElement.on('ready', (event) => {
         console.log('bblog ready: ', event);
       });
-      // @ts-expect-error - event not typed
       habaneroElement.on('focus', (event) => {
         console.log('bblog focus: ', event);
       });
-      // @ts-expect-error - event not typed
       habaneroElement.on('blur', (event) => {
         console.log('bblog blur: ', event);
       });
-      // @ts-expect-error - event not typed
       habaneroElement.on('escape', (event) => {
         console.log('bblog escape: ', event);
       });
-      // @ts-expect-error - event not typed
       habaneroElement.on('loaderror', (event) => {
         console.log('bblog loaderror: ', event);
       });
@@ -45,7 +39,6 @@ export default function Habanero() {
         console.log('bblog loaderstart: ', event);
       });
 
-      // @ts-expect-error - event not typed
       habaneroElement.on('confirm', (event) => {
         console.log('bblog confirm: ', event);
 
@@ -57,7 +50,7 @@ export default function Habanero() {
         });
       });
 
-      window.habaneroElement = habaneroElement;
+      window.paymentFormElement = habaneroElement;
 
       habaneroElement.mount(ref.current);
       didMount.current = true;
