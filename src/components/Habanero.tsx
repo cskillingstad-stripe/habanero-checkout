@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   useCheckout,
   PaymentFormElement,
@@ -5,6 +6,14 @@ import {
 
 export default function Habanero() {
   const checkoutState = useCheckout();
+
+  // Expose checkout to window for debugging
+  useEffect(() => {
+    if (checkoutState.type === 'success' && checkoutState.checkout) {
+      // @ts-expect-error - checkout not typed on window
+      window.checkout = checkoutState.checkout;
+    }
+  }, [checkoutState]);
 
   return (
     <div className="pt-6 md:pt-20 px-10 md:pl-20 md:pr-0 md:shadow-[-8px_0_16px_0_rgba(0,0,0,0.05)] min-h-screen">
