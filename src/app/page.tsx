@@ -17,20 +17,6 @@ const stripePromise = loadStripe('pk_test_fEnfqkUj7brxj0AAGO5Ig8rg', {
 });
 
 export default function Home() {
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchClientSecret = async () => {
-      const res = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-      });
-      const data = await res.json();
-      setClientSecret(data.clientSecret);
-    };
-
-    fetchClientSecret();
-  }, []);
-
   const appearance: Appearance = {
     theme: 'stripe',
 
@@ -43,19 +29,17 @@ export default function Home() {
     labels: 'above',
   };
 
-  if (!clientSecret) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader size="lg" />
-      </div>
-    );
-  }
-
   return (
     <CheckoutProvider
       stripe={stripePromise}
       options={{
-        clientSecret,
+        fetchClientSecret: async () => {
+          const res = await fetch('/api/create-checkout-session', {
+            method: 'POST',
+          });
+          const data = await res.json();
+          return data.clientSecret;
+        },
         elementsOptions: {
           appearance,
           savedPaymentMethod: {
