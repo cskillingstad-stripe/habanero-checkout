@@ -100,54 +100,54 @@ export async function POST(request: Request) {
       // },
 
       // Enable custom fields
-      custom_fields: [
-        {
-          type: 'text',
-          label: {
-            type: 'custom',
-            custom: 'Custom monogram',
-          },
-          key: 'custom_monogram',
-          optional: false,
-          text: {
-            maximum_length: 3,
-          },
-        },
-        {
-          type: 'dropdown',
-          label: {
-            type: 'custom',
-            custom: 'Gift wrapping',
-          },
-          key: 'gift_wrapping',
-          optional: true,
-          dropdown: {
-            options: [
-              {
-                label: 'Eco-friendly gift box',
-                value: 'ecogiftbox',
-              },
-              {
-                label: 'Regular gift wrap',
-                value: 'giftwrap',
-              },
-            ],
-          },
-        },
-        {
-          type: 'numeric',
-          label: {
-            type: 'custom',
-            custom: 'Group order code',
-          },
-          key: 'group_order_code',
-          optional: true,
-          numeric: {
-            minimum_length: 8,
-            maximum_length: 8,
-          },
-        },
-      ],
+      // custom_fields: [
+      //   {
+      //     type: 'text',
+      //     label: {
+      //       type: 'custom',
+      //       custom: 'Custom monogram',
+      //     },
+      //     key: 'custom_monogram',
+      //     optional: false,
+      //     text: {
+      //       maximum_length: 3,
+      //     },
+      //   },
+      //   {
+      //     type: 'dropdown',
+      //     label: {
+      //       type: 'custom',
+      //       custom: 'Gift wrapping',
+      //     },
+      //     key: 'gift_wrapping',
+      //     optional: true,
+      //     dropdown: {
+      //       options: [
+      //         {
+      //           label: 'Eco-friendly gift box',
+      //           value: 'ecogiftbox',
+      //         },
+      //         {
+      //           label: 'Regular gift wrap',
+      //           value: 'giftwrap',
+      //         },
+      //       ],
+      //     },
+      //   },
+      //   {
+      //     type: 'numeric',
+      //     label: {
+      //       type: 'custom',
+      //       custom: 'Group order code',
+      //     },
+      //     key: 'group_order_code',
+      //     optional: true,
+      //     numeric: {
+      //       minimum_length: 8,
+      //       maximum_length: 8,
+      //     },
+      //   },
+      // ],
 
       // Enable SPM
       customer: 'cus_TvOzXu1J5jSRw2',
