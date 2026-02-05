@@ -142,7 +142,14 @@ export default function OrderSummary() {
               stroke={1.5}
               className="text-gray-700"
             />
-            <h1 className="text-sm font-medium text-gray-900">Merchant name</h1>
+            <h1 className="text-sm font-medium text-gray-900">
+              <a
+                href="https://go/loginas/acct_1SxXw4LkR3ESQLj1"
+                target="_blank"
+              >
+                Test merchant
+              </a>
+            </h1>
           </div>
         </div>
 
