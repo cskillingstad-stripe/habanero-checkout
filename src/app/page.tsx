@@ -7,14 +7,17 @@ import { Loader } from '@mantine/core';
 import OrderSummary from '@/components/OrderSummary';
 import Habanero from '@/components/Habanero';
 
-const stripePromise = loadStripe('pk_test_fEnfqkUj7brxj0AAGO5Ig8rg', {
-  betas: [
-    // "custom_checkout_beta_6",
-    // 'custom_checkout_adaptive_pricing_2',
-    // "custom_checkout_tax_id_1",
-    'custom_checkout_payment_form_1',
-  ],
-});
+const stripePromise = loadStripe(
+  'pk_test_51SxXw4LkR3ESQLj1YBCbqTMeq3OkwUqJLXaJMXn8fDq2aB2yhPgtaZnowwMyVzzLTdSSbvzamYcrU2tNTehcIUNQ00rTCtzESG',
+  {
+    betas: [
+      // "custom_checkout_beta_6",
+      // 'custom_checkout_adaptive_pricing_2',
+      // "custom_checkout_tax_id_1",
+      'custom_checkout_payment_form_1',
+    ],
+  }
+);
 
 export default function Home() {
   const [clientSecret, setClientSecret] = useState<string | null>(null);

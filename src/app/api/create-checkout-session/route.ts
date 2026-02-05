@@ -150,7 +150,7 @@ export async function POST(request: Request) {
       ],
 
       // Enable SPM
-      customer: 'cus_TPW2UsM4sSDvGh',
+      customer: 'cus_TvOzXu1J5jSRw2',
       customer_update: {
         name: 'auto',
         shipping: 'auto',
