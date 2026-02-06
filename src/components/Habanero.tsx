@@ -18,6 +18,20 @@ export default function Habanero() {
   return (
     <div className="pt-6 md:pt-20 px-10 md:pl-20 md:pr-0 md:shadow-[-8px_0_16px_0_rgba(0,0,0,0.05)] min-h-screen">
       <PaymentFormElement
+        // options={{
+        //   contacts: [
+        //     {
+        //       name: 'Jenny Rosen',
+        //       address: {
+        //         line1: '185 Berry St.',
+        //         city: 'San Francisco',
+        //         state: 'CA',
+        //         postal_code: '94941',
+        //         country: 'US',
+        //       },
+        //     },
+        //   ],
+        // }}
         onChange={(event) => {
           console.log('bblog change: ', event);
         }}
