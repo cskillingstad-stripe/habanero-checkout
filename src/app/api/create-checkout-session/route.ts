@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import {NextResponse} from 'next/server';
 import Stripe from 'stripe';
-import { ITEMS, SHIPPING_OPTIONS } from '@/constants';
+import {ITEMS, SHIPPING_OPTIONS} from '@/constants';
 
 const stripe = new Stripe(process.env.STRIPE_TEST_SK!, {
   apiVersion: '2025-08-27.basil;custom_checkout_payment_form_preview=v1',
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       // Hardcode for now just one per ITEM
       line_items: Object.values(ITEMS).map((item) => ({
         price_data: {
-          currency: 'usd',
+          currency: 'cad',
           product_data: {
             name: item.name,
           },
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
           type: 'fixed_amount',
           fixed_amount: {
             amount: option.price,
-            currency: 'usd',
+            currency: 'cad',
           },
           delivery_estimate: {
             minimum: option.min,
@@ -150,28 +150,28 @@ export async function POST(request: Request) {
       // ],
 
       // Enable SPM
-      customer: 'cus_TvOzXu1J5jSRw2',
-      customer_update: {
-        name: 'auto',
-        shipping: 'auto',
-      },
-      payment_intent_data: {
-        setup_future_usage: 'off_session',
-      },
-      saved_payment_method_options: {
-        payment_method_save: 'enabled',
-        payment_method_remove: 'enabled',
-      },
+      // customer: 'cus_TvOzXu1J5jSRw2',
+      // customer_update: {
+      //   name: 'auto',
+      //   shipping: 'auto',
+      // },
+      // payment_intent_data: {
+      //   setup_future_usage: 'off_session',
+      // },
+      // saved_payment_method_options: {
+      //   payment_method_save: 'enabled',
+      //   payment_method_remove: 'enabled',
+      // },
 
       return_url: `${request.headers.get('origin')}/complete?session_id={CHECKOUT_SESSION_ID}`,
     });
 
-    return NextResponse.json({ clientSecret: session.client_secret });
+    return NextResponse.json({clientSecret: session.client_secret});
   } catch (error) {
     console.error('Error creating checkout session:', error);
     return NextResponse.json(
-      { error: 'Error creating checkout session' },
-      { status: 500 }
+      {error: 'Error creating checkout session'},
+      {status: 500}
     );
   }
 }
