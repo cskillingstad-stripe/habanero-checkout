@@ -69,7 +69,7 @@ export default function OrderSummary() {
             />
             <h1 className="text-sm font-medium text-gray-900">
               <a
-                href="https://go/loginas/acct_1SxXw4LkR3ESQLj1"
+                href="https://go/loginas/acct_1SzSXoA1wAikgJu5"
                 target="_blank"
               >
                 Test merchant
@@ -144,7 +144,7 @@ export default function OrderSummary() {
             />
             <h1 className="text-sm font-medium text-gray-900">
               <a
-                href="https://go/loginas/acct_1SxXw4LkR3ESQLj1"
+                href="https://go/loginas/acct_1SzSXoA1wAikgJu5"
                 target="_blank"
               >
                 Test merchant
